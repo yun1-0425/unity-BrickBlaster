@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class AimingScript : MonoBehaviour
+public class ShooterScript : MonoBehaviour
 {
     public float leftWall = -4;
     public float rightWall = 4;
     public float topWall = 6;
 
     public float lineWidth = 0.05f;
+    public Vector2 direction;
 
     public LineRenderer line;
     public LineRenderer lineRefl;
     private PlayerInputActions input;
+    public GameObject ball;
+
     Vector2 aimPosition;
 
     void Awake()
@@ -22,6 +25,7 @@ public class AimingScript : MonoBehaviour
     private void OnEnable()
     {
         input.Enable();
+        input.Gameplay.Shoot.canceled += onShoot ;
     }
 
     private void OnDisable()
@@ -38,10 +42,11 @@ public class AimingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // aim
         Vector2 screenPos = input.Gameplay.Aim.ReadValue<Vector2>();
         aimPosition = Camera.main.ScreenToWorldPoint(screenPos);
 
-        Vector2 direction = (aimPosition - (Vector2)transform.position).normalized;
+        direction = (aimPosition - (Vector2)transform.position).normalized;
         if (direction.x == 0)
         {
             direction.x = 0.0001f; // Avoid division by zero
@@ -53,6 +58,8 @@ public class AimingScript : MonoBehaviour
         //Debug.Log(direction);
 
         drawAimLine(direction);
+
+        // shoot
     }
 
     void drawAimLine(Vector2 dir)
@@ -93,5 +100,13 @@ public class AimingScript : MonoBehaviour
         
         line.startWidth = line.endWidth = lineWidth;
         lineRefl.startWidth = lineRefl.endWidth = lineWidth;
+    }
+
+    void onShoot(InputAction.CallbackContext context)
+    {
+        // shoot
+        //Debug.Log("Shoot!");
+        //ball.SetActive(true);
+        Instantiate(ball, transform.position, transform.rotation);
     }
 }
