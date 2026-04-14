@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2920220261483414550}
   - component: {fileID: 3827900151532886701}
   - component: {fileID: 880704567955641960}
-  m_Layer: 0
+  - component: {fileID: 6010978123032807488}
+  m_Layer: 3
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,6 +142,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4457bb19b62564140a07d34079f26bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallScript
-  speed: 5
-  aiming: {fileID: 0}
+  speed: 8
+  shooter: {fileID: 0}
   dir: {x: 0, y: 0}
+--- !u!50 &6010978123032807488
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274466550325574367}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
