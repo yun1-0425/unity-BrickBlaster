@@ -70,9 +70,11 @@ public class AimingScript : MonoBehaviour
 
         float minT = Mathf.Min(tTop, Mathf.Max(tLeft, tRight)); // tLeft 和 tRight 必為一正一負
 
+        Vector3 hitPoint = transform.position + (Vector3)dir * minT;
+
         // draw line
         line.SetPosition(0, transform.position);
-        line.SetPosition(1, transform.position + (Vector3)dir * minT);
+        line.SetPosition(1, hitPoint);
 
         // reflection
         Vector2 reflDir;
@@ -85,8 +87,8 @@ public class AimingScript : MonoBehaviour
         }
 
         // draw reflection line
-        lineRefl.SetPosition(0, transform.position + (Vector3)dir * minT);
-        lineRefl.SetPosition(1, transform.position + (Vector3)reflDir * 20);
+        lineRefl.SetPosition(0, hitPoint);
+        lineRefl.SetPosition(1, hitPoint + (Vector3)reflDir * 20);
         
         line.startWidth = line.endWidth = lineWidth;
         lineRefl.startWidth = lineRefl.endWidth = lineWidth;
