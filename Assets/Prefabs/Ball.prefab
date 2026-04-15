@@ -143,8 +143,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallScript
   speed: 8
+  rb: {fileID: 6010978123032807488}
   shooter: {fileID: 0}
   dir: {x: 0, y: 0}
+  leftWall: -4
+  rightWall: 4
+  topWall: 6
 --- !u!50 &6010978123032807488
 Rigidbody2D:
   serializedVersion: 5
