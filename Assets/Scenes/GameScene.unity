@@ -1163,6 +1163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963686693}
+  - component: {fileID: 963686694}
   m_Layer: 0
   m_Name: Round Manager
   m_TagString: Manager
@@ -1185,6 +1186,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963686694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963686692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfbc0ac852914f42883f4046210a032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoundManagerScript
+  state: 0
+  ballsToShoot: 3
+  activeBalls: 0
+  direction: {x: 0, y: 0}
+  shooterPos: {x: 0, y: 0, z: 0}
+  leftWall: -4
+  rightWall: 4
+  topWall: 6
 --- !u!1001 &978050459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1331,6 +1352,9 @@ MonoBehaviour:
   line: {fileID: 1476216666}
   lineRefl: {fileID: 1745880318}
   ball: {fileID: 4274466550325574367, guid: 36701976441fa1b4ea7f857ed1a250af, type: 3}
+  manager: {fileID: 0}
+  ballsToShoot: 1
+  shootRate: 1
 --- !u!1 &1091975287
 GameObject:
   m_ObjectHideFlags: 0
