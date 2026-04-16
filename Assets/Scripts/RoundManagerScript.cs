@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class RoundManagerScript : MonoBehaviour
 {
-    enum Gamestate {
+    public enum Gamestate {
         Aiming,
         Shooting, 
-        BallMoving, 
-        BricksMoving
+        BallMoving
+        //BricksMoving
     } 
-    //Gamestate state = Gamestate.Aiming;
+    public Gamestate state = Gamestate.Aiming;
 
     public int ballsToShoot = 1;
     public int activeBalls = 0;
@@ -29,6 +29,16 @@ public class RoundManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    public void ballDestroyed() {
+        activeBalls --;
+
+        if (activeBalls == 0)
+        {
+            state = Gamestate.Aiming;
+            //GameObject.FindGameObjectWithTag("Shooter").SetActive(true);
+            Debug.Log("All balls destroyed, back to aiming");
+        }
     }
 }

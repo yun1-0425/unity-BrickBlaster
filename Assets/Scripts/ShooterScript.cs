@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static RoundManagerScript;
 
 public class ShooterScript : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class ShooterScript : MonoBehaviour
 
     public RoundManagerScript manager;
     public int ballsToShoot = 1;
+    private float timer = 0f;
+    public float shootRate = 1f;
+    private int ballsShot = 0;
 
     Vector2 aimPosition;
 
@@ -65,6 +69,10 @@ public class ShooterScript : MonoBehaviour
         drawAimLine(direction);
 
         // shoot
+        if (manager.state == Gamestate.Shooting)
+        {
+            shootBallsOverTime();
+        }
     }
 
     void drawAimLine(Vector2 dir)
@@ -110,14 +118,30 @@ public class ShooterScript : MonoBehaviour
     void onShoot(InputAction.CallbackContext context)
     {
         manager.shooterPos = transform.position;
+        manager.state = Gamestate.Shooting;
         // shoot
         //Debug.Log("Shoot!");
-        //ball.SetActive(true);
+        //ball.SetActive(true);        
+    }
 
-        //for (int i=0; i<ballsToShoot; i++)
-        Instantiate(ball, transform.position, transform.rotation);
-        manager.activeBalls ++;
-        
-        //gameObject.SetActive(false);
+    void shootBallsOverTime()
+    {
+        if (ballsShot < ballsToShoot) // shoot
+        {
+            if (timer < shootRate) // not time to shoot next ball
+            {
+                timer += Time.deltaTime;
+            } else // time to shoot next ball
+            {
+                Instantiate(ball, transform.position, transform.rotation);
+                manager.activeBalls ++;
+                ballsShot ++;
+                timer = 0;
+            }
+        } else // finish shooting
+        {
+            manager.state = Gamestate.BallMoving;
+            gameObject.SetActive(false);
+        }
     }
 }

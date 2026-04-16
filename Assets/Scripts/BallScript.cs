@@ -71,7 +71,7 @@ public class BallScript : MonoBehaviour
             if (Vector2.Distance(transform.position, shooterPos) < 0.01f)
             {
                 Destroy(gameObject);
-                manager.activeBalls --;
+                manager.ballDestroyed();
                 //Debug.Log("Object Destroyed");
             }
         }
