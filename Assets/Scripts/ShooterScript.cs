@@ -51,22 +51,24 @@ public class ShooterScript : MonoBehaviour
     void Update()
     {
         // aim
-        Vector2 screenPos = input.Gameplay.Aim.ReadValue<Vector2>();
-        aimPosition = Camera.main.ScreenToWorldPoint(screenPos);
+        if (manager.state == Gamestate.Aiming) {
+            Vector2 screenPos = input.Gameplay.Aim.ReadValue<Vector2>();
+            aimPosition = Camera.main.ScreenToWorldPoint(screenPos);
 
-        direction = (aimPosition - (Vector2)transform.position).normalized;
-        if (direction.x == 0)
-        {
-            direction.x = 0.0001f; // Avoid division by zero
-        }
-        if (direction.y < 0.3)
-        {
-            direction.y = 0.3f; // limit the angle
-        }
-        //Debug.Log(direction);
-        manager.direction = direction;
+            direction = (aimPosition - (Vector2)transform.position).normalized;
+            if (direction.x == 0)
+            {
+                direction.x = 0.0001f; // Avoid division by zero
+            }
+            if (direction.y < 0.3)
+            {
+                direction.y = 0.3f; // limit the angle
+            }
+            //Debug.Log(direction);
+            manager.direction = direction;
 
-        drawAimLine(direction);
+            drawAimLine(direction);
+        }
 
         // shoot
         if (manager.state == Gamestate.Shooting)
@@ -117,15 +119,19 @@ public class ShooterScript : MonoBehaviour
 
     void onShoot(InputAction.CallbackContext context)
     {
+        // shoot
         manager.shooterPos = transform.position;
         manager.state = Gamestate.Shooting;
-        // shoot
+        input.Disable();
+        line.enabled = false;
+        lineRefl.enabled = false;
         //Debug.Log("Shoot!");
         //ball.SetActive(true);        
     }
 
     void shootBallsOverTime()
     {
+        Debug.Log($"Shooting balls... {ballsShot}/{ballsToShoot}");
         if (ballsShot < ballsToShoot) // shoot
         {
             if (timer < shootRate) // not time to shoot next ball
@@ -140,8 +146,9 @@ public class ShooterScript : MonoBehaviour
             }
         } else // finish shooting
         {
+            ballsShot = 0;
             manager.state = Gamestate.BallMoving;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 }

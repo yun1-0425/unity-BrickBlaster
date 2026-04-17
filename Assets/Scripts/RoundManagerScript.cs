@@ -20,6 +20,9 @@ public class RoundManagerScript : MonoBehaviour
     public float rightWall = 4;
     public float topWall = 6;
 
+    public LineRenderer line;
+    public LineRenderer lineRefl;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,8 +40,11 @@ public class RoundManagerScript : MonoBehaviour
         if (activeBalls == 0)
         {
             state = Gamestate.Aiming;
-            //GameObject.FindGameObjectWithTag("Shooter").SetActive(true);
             Debug.Log("All balls destroyed, back to aiming");
+            // enable stuff
+            GameObject.FindGameObjectWithTag("Shooter").GetComponent<ShooterScript>().input.Enable();
+            line.enabled = true;
+            lineRefl.enabled = true;
         }
     }
 }
