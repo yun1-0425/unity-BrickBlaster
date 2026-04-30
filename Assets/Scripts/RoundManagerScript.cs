@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class RoundManagerScript : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class RoundManagerScript : MonoBehaviour
     public LineRenderer line;
     public LineRenderer lineRefl;
     public bool noBallsBack = true;
+
+    // bricks
+    public List<BrickScript> bricks = new List<BrickScript>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -81,8 +85,11 @@ public class RoundManagerScript : MonoBehaviour
     {
         state = Gamestate.BricksMoving;
 
-        // 移動磚塊?
-        
+        // 移動磚塊
+        foreach (var brick in bricks)
+        {
+            brick.moveDownOneStep();
+        }
         // reset shooter position
 
     }
