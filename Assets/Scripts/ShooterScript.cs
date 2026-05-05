@@ -79,7 +79,7 @@ public class ShooterScript : MonoBehaviour
             shootBallsOverTime();
         }
         
-        if (manager.state == Gamestate.BricksMoving)
+        if (manager.state == Gamestate.BrickPhase)
         {
             //Debug.Log("Resetting shooter position");
             nextStartPosX = manager.nextStartPosX;
@@ -173,7 +173,7 @@ public class ShooterScript : MonoBehaviour
             transform.position += dir * speed * Time.fixedDeltaTime;
         } else
         {
-            manager.startAiming(); // 暫時
+            manager.startAiming(); // 暫時?
             //Debug.Log("Shooter position reset, back to aiming");
         }
     }

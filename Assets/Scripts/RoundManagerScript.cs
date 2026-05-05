@@ -7,7 +7,7 @@ public class RoundManagerScript : MonoBehaviour
         Aiming,
         Shooting, 
         BallMoving,
-        BricksMoving
+        BrickPhase
     } 
     public Gamestate state = Gamestate.Aiming;
 
@@ -52,12 +52,12 @@ public class RoundManagerScript : MonoBehaviour
         {
             //nextStartPosX = returnPosX;
             //Debug.Log($"nextStartPosX: {nextStartPosX}");
-            startBricksMoving();
+            startBrickPhase();
         }
     }
 
     // when balls all are destroyed
-    public void startAiming()
+    public void startAiming() // called by shooter after it resets
     {
             state = Gamestate.Aiming;
             //Debug.Log("All balls destroyed, back to aiming");
@@ -81,16 +81,15 @@ public class RoundManagerScript : MonoBehaviour
         state = Gamestate.BallMoving;
     }
 
-    public void startBricksMoving()
+    public void startBrickPhase()
     {
-        state = Gamestate.BricksMoving;
+        state = Gamestate.BrickPhase;
 
         // 移動磚塊
         foreach (var brick in bricks)
         {
             brick.moveDownOneStep();
         }
-        // reset shooter position
-
+        // and reset shooter position
     }
 }
