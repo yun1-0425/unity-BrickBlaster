@@ -7,7 +7,8 @@ public class RoundManagerScript : MonoBehaviour
         Aiming,
         Shooting, 
         BallMoving,
-        BrickPhase
+        BrickPhase, 
+        GameOver
     } 
     public Gamestate state = Gamestate.Aiming;
 
@@ -65,7 +66,7 @@ public class RoundManagerScript : MonoBehaviour
             // enable stuff
             GameObject.FindGameObjectWithTag("Shooter").GetComponent<ShooterScript>().input.Enable();
             line.enabled = true;
-            lineRefl.enabled = true;            
+            lineRefl.enabled = true;
 
             noBallsBack = true;
     }
@@ -86,10 +87,24 @@ public class RoundManagerScript : MonoBehaviour
         state = Gamestate.BrickPhase;
 
         // 移動磚塊
+        bool hitBottom = false;
         foreach (var brick in bricks)
         {
-            brick.moveDownOneStep();
+            if (brick.moveDownOneStep())
+            {
+                hitBottom = true;
+            }
+        }
+        if (hitBottom)
+        {
+            gameOver();
         }
         // and reset shooter position
+    }
+
+    private void gameOver()
+    {
+        Debug.Log("Game Over!");
+        state = Gamestate.GameOver;
     }
 }

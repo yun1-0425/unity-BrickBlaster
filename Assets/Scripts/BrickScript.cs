@@ -6,6 +6,7 @@ public class BrickScript : MonoBehaviour
     public int  hp =  1;
     public TextMeshPro hpText;
     public RoundManagerScript manager;
+    public float deadLineY = -6.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,8 +33,9 @@ public class BrickScript : MonoBehaviour
         }
     }
 
-    public void moveDownOneStep()
+    public bool moveDownOneStep()
     {
         transform.position += Vector3.down;
+        return transform.position.y <= deadLineY;
     }
 }
