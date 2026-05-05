@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class RoundManagerScript : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class RoundManagerScript : MonoBehaviour
     public LineRenderer line;
     public LineRenderer lineRefl;
     public bool noBallsBack = true;
+
+    public GameObject gameOverScreen;
 
     // bricks
     public List<BrickScript> bricks = new List<BrickScript>();
@@ -106,5 +109,11 @@ public class RoundManagerScript : MonoBehaviour
     {
         Debug.Log("Game Over!");
         state = Gamestate.GameOver;
+        gameOverScreen.SetActive(true);
+    }
+
+    public void restartGame() // not used yet
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
