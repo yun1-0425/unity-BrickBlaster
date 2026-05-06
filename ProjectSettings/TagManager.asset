@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shooter
   - Manager
+  - BrickSpawner
   layers:
   - Default
   - TransparentFX

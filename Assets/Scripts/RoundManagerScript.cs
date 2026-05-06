@@ -26,9 +26,11 @@ public class RoundManagerScript : MonoBehaviour
 
     public LineRenderer line;
     public LineRenderer lineRefl;
-    public bool noBallsBack = true;
-
+    public BrickSpawnerScript brickSpawner;
     public GameObject gameOverScreen;
+
+    public bool noBallsBack = true;
+    public int numberOfBricksToSpawn = 5;
 
     // bricks
     public List<BrickScript> bricks = new List<BrickScript>();
@@ -36,7 +38,7 @@ public class RoundManagerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        brickSpawner = GameObject.FindGameObjectWithTag("BrickSpawner").GetComponent<BrickSpawnerScript>();
     }
 
     // Update is called once per frame
@@ -102,6 +104,9 @@ public class RoundManagerScript : MonoBehaviour
         {
             gameOver();
         }
+
+        // spawn new row of bricks
+        brickSpawner.spawnBrick(numberOfBricksToSpawn);
         // and reset shooter position
     }
 
